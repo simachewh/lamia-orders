@@ -1,0 +1,37 @@
+{
+  "name": "lamia-orders-level-2",
+  "version": "1.0.0",
+  "description": "A REST-ish api for handling orders",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node server.js",
+    "devServ": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simachewh/lamia-orders.git"
+  },
+  "keywords": [
+    "REST",
+    "node",
+    "express",
+    "orders"
+  ],
+  "author": "simachew",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simachewh/lamia-orders/issues"
+  },
+  "homepage": "https://github.com/simachewh/lamia-orders#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.1",
+    "express": "^4.17.1",
+    "express-validator": "^6.6.1",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
