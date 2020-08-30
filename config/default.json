@@ -1,3 +1,46 @@
 {
-    "port": 35001
+    "server": {
+        "port": 35001
+    },
+    "mongoDb": {
+        "dbUri": "mongodb+srv://sime123:sime123@devconnector.9qn97.mongodb.net/test?retryWrites=true&w=majority"
+    },
+    "defaultVat": 0.15,
+    "countries": {
+        "finland": {
+            "tax": 0.24,
+            "code": "fi"
+        },
+        "estonia": {
+            "tax": 0.20,
+            "code": "ee"
+        },
+        "poland": {
+            "tax": 0.23,
+            "code": "pl"
+        }
+    },
+    "products": {
+        "milk": {
+            "price": 2.99
+        },
+        "bread": {
+            "price": 1.99
+        },
+        "salmon": {
+            "price": 15.55
+        },
+        "disinfectant": {
+            "price": 3.98
+        },
+        "shoes1": {
+            "price": 49.99
+        },
+        "shoes2": {
+            "price": 99.99
+        },
+        "tshirt1": {
+            "price": 29.95
+        }
+    }
 }
