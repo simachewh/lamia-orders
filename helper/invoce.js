@@ -7,12 +7,11 @@ const calculateInvoce = (orderInfo) => {
     let price;
     let taxableTotal;
     let invoice = {};
-    console.log('tax', tax);
-    console.log('prodcuts ', products);
+    //console.log('tax', tax);
+    //console.log('prodcuts ', products);
 
     const totalPrice = products.reduce((accumulator, item) => {
         price = config.get("products").get(item.name).price;
-
         item.price = price;
         taxableTotal = item.quantity * price;
         item.total = item.quantity * price;
@@ -20,11 +19,10 @@ const calculateInvoce = (orderInfo) => {
         accumulator = item.totalWithTax;
         return accumulator;
     }, 0);
-    console.log('total price is', totalPrice);
+    //console.log('total price is', totalPrice);
     invoice.products = products;
     invoice.total = totalPrice;
-    console.log('invoce ', invoice);
-
+    //console.log('invoce ', invoice);
     return invoice;
 }
 

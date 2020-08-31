@@ -1,10 +1,11 @@
 const express = require('express');
-const orders = require('./routes/api/orders');
 const config = require('config');
+const orders = require('./routes/api/orders');
+const connectDB = require('./config/db');
 
 const app = express();
 const PORT = process.env.PORT || config.get('server.port');
-
+connectDB();
 app.use(express.json({
     extended: false
 }));

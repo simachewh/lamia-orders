@@ -22,12 +22,15 @@ const OrdersSchema = new Schema({
             type: String,
             required: true
         },
-        qunantity: {
+        quantity: {
             type: Number,
             required: true
         }
-    }]
-
+    }],
+    date: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 module.exports = Orders = mongoose.model('orders', OrdersSchema);
