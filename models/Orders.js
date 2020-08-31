@@ -1,3 +1,6 @@
+/**
+ * @description A mongoose model that represents Orders.
+ */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 

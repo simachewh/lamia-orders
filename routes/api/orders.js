@@ -1,7 +1,11 @@
+/**
+ * @description A route handler for api/orders
+ */
 const express = require('express');
 const {
     check,
-    validationResult
+    validationResult,
+    oneOf
 } = require('express-validator');
 const invoiceMaker = require('../../helper/invoce');
 const Orders = require('../../models/Orders');
@@ -31,9 +35,16 @@ router.get('/', async (req, res) => {
  */
 router.post('/', [
     check('country', 'Country is required').not().isEmpty(),
-    check('products', 'Products is required').not().isEmpty(),
-    check('invoiceFormat', 'InvoceFormat is required.').not().isEmpty()
+    check('products', 'Products is required').isArray(),
+    check('invoiceFormat').isIn(['json', 'html', 'other']),
+    check('emailInvoice', 'EmailInvoice is required').isBoolean()
 ], async (req, res) => {
+    let emailInvoice = req.body.emailInvoice;
+    if (emailInvoice === true) {
+        await check('email', 'Email is required').isEmail().run(req)
+    } else {
+        emailInvoice = false;
+    }
     const errors = validationResult(req);
     // check if there are validation errors and respond with error message.
     if (!errors.isEmpty()) {
@@ -44,7 +55,6 @@ router.post('/', [
     const products = req.body.products;
     const country = req.body.country;
     const invoiceFormat = req.body.invoiceFormat;
-    const emailInvoice = req.body.emailInvoice;
     const orderInfo = {
         products: products,
         country: country,
