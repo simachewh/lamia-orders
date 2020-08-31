@@ -40,6 +40,7 @@ router.post('/', [
     check('emailInvoice', 'EmailInvoice is required').isBoolean()
 ], async (req, res) => {
     let emailInvoice = req.body.emailInvoice;
+    // conditional validation on email
     if (emailInvoice === true) {
         await check('email', 'Email is required').isEmail().run(req)
     } else {
@@ -55,18 +56,19 @@ router.post('/', [
     const products = req.body.products;
     const country = req.body.country;
     const invoiceFormat = req.body.invoiceFormat;
-    const orderInfo = {
+    let orderInfo = {
         products: products,
         country: country,
         emailInvoice: emailInvoice,
-        invoiceFormat: invoiceFormat
+        invoiceFormat: invoiceFormat,
+        total: 0
     }
     try {
         // TODO: invoice could also have it's own model
-        const invoice = invoiceMaker(orderInfo);
-
+        orderInfo = invoiceMaker.begninigPriceExtension(orderInfo)
+        let invoice = invoiceMaker.calculateInvoce(orderInfo);
+        invoice = invoiceMaker.endPriceExtension(orderInfo);
         const newOrder = new Orders(orderInfo);
-        // TODO : add email based on emailInvoice prop
 
         const order = await newOrder.save();
         if (!order) {
