@@ -37,11 +37,9 @@ router.post('/', [
     }
     console.log('orderInfo', orderInfo);
 
-    const total = await invoiceMaker(orderInfo);
+    const invoice = await invoiceMaker(orderInfo);
 
-    await res.json({
-        total: total
-    });
+    await res.json(invoice);
 });
 
 module.exports = router;
