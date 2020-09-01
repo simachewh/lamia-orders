@@ -1,0 +1,18 @@
+doctype html
+html(lang="en")
+    head
+        title=Invoice
+    body
+        h3 Products
+            each val in products
+                ul
+                    li= 'Name: ' + val.name
+                    li='Price: ' + val.price
+                    li='Quantinty: ' + val.quantity
+                    li='Total: ' + val.total
+                    li='+Tax: ' + val.totalWithTax
+                p= '-----------------------'
+
+        h4= 'Total :-' + total
+
+    
