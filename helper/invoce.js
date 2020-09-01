@@ -1,5 +1,10 @@
 const config = require('config');
 module.exports = {
+    /**
+     * @description Calculates an the taxable total for each procuct, the total with tax 
+     * for each product and the grand total for all the products.
+     * @returns Object
+     */
     calculateInvoce: (orderInfo) => {
         let products = orderInfo.products;
         let country = orderInfo.country;
@@ -7,22 +12,19 @@ module.exports = {
         let price;
         let taxableTotal;
         let invoice = {};
-        //console.log('tax', tax);
-        //console.log('prodcuts ', products);
 
         const totalPrice = products.reduce((accumulator, item) => {
             price = config.get("products").get(item.name).price;
             item.price = price;
             taxableTotal = item.quantity * price;
             item.total = item.quantity * price;
-            item.totalWithTax = item.total + (item.total * tax);
+            item.totalWithTax = Math.round((item.total + (item.total * tax) + Number.EPSILON) * 100) / 100;
             accumulator = item.totalWithTax;
-            return accumulator;
+            return Math.round((accumulator + Number.EPSILON) * 100) / 100;
         }, 0);
-        //console.log('total price is', totalPrice);
         invoice.products = products;
         invoice.total = totalPrice;
-        //console.log('invoce ', invoice);
+        invoice.tax = tax
         return invoice;
     },
     /**

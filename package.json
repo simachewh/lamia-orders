@@ -30,6 +30,7 @@
     "express": "^4.17.1",
     "express-validator": "^6.6.1",
     "mongoose": "^5.10.2",
+    "pug": "^3.0.0",
     "request": "^2.88.2"
   },
   "devDependencies": {

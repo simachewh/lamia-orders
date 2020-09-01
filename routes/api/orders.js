@@ -67,13 +67,17 @@ router.post('/', [
         // TODO: invoice could also have it's own model
         orderInfo = invoiceMaker.begninigPriceExtension(orderInfo)
         let invoice = invoiceMaker.calculateInvoce(orderInfo);
-        invoice = invoiceMaker.endPriceExtension(orderInfo);
+        invoice = invoiceMaker.endPriceExtension(invoice);
         const newOrder = new Orders(orderInfo);
+        //console.log('invoice in the end', invoice);
 
         const order = await newOrder.save();
         if (!order) {
             console.error('Error: faild to save Order.');
             return res.status(500).send('The server encountered an internal error');
+        }
+        if (invoiceFormat === 'html') {
+            return res.status(200).render('invoice', invoice);
         }
         res.status(200).json(invoice);
     } catch (error) {

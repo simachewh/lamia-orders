@@ -1,9 +1,12 @@
 const express = require('express');
 const config = require('config');
+const path = require('path')
 const orders = require('./routes/api/orders');
 const connectDB = require('./config/db');
 
 const app = express();
+app.set('views', path.join(__dirname, 'template'));
+app.set('view engine', 'pug');
 const PORT = process.env.PORT || config.get('server.port');
 connectDB();
 app.use(express.json({
