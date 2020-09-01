@@ -5,6 +5,13 @@
     "mongoDb": {
         "dbUri": "mongodb+srv://sime123:sime123@devconnector.9qn97.mongodb.net/test?retryWrites=true&w=majority"
     },
+    "mail" : {
+        "host": "smtp.mailtrap.io",
+        "port": 2525,
+        "userName": "7f66e3c43002ec",
+        "password": "8bead785690d2f",
+        "orderMailer": "simachew.tibebu@gmail.com"
+    },
     "defaultVat": 0.15,
     "countries": {
         "finland": {

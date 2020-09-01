@@ -2,6 +2,8 @@
  * @description A route handler for api/orders
  */
 const express = require('express');
+const invoiceEmailer = require('../../mail/invoiceMailer');
+const config = require('config');
 const {
     check,
     validationResult,
@@ -43,6 +45,7 @@ router.post('/', [
     // conditional validation on email
     if (emailInvoice === true) {
         await check('email', 'Email is required').isEmail().run(req)
+        const email = req.body.email;
     } else {
         emailInvoice = false;
     }
@@ -80,6 +83,18 @@ router.post('/', [
             return res.status(200).render('invoice', invoice);
         }
         res.status(200).json(invoice);
+        // send invoice via email
+        if (emailInvoice) {
+            // TODO: send email here
+            // This part still needs work
+            const message = {
+                from: config.get('mail.orderMailer'),
+                to: email,
+                subject: 'Your Order to lamia was recieved',
+                text: 'Have the most fun you can!'
+            }
+            invoiceEmailer.emailInvoice(message);
+        }
     } catch (error) {
         console.error("Error: ", error);
         return res.status(500).send('An internal serer error occured');
