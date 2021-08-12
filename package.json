@@ -31,7 +31,7 @@
     "express-validator": "^6.6.1",
     "mongoose": "^5.10.2",
     "nodemailer": "^6.4.11",
-    "pug": "^3.0.0",
+    "pug": "^3.0.1",
     "request": "^2.88.2"
   },
   "devDependencies": {
